@@ -14,8 +14,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -74,5 +72,5 @@ Route::middleware('auth')->group(function () {
 });
 
 
-   Route::get('/', [HomeController::class, 'index'])
-        ->name('home');
+Route::get('/', [HomeController::class, 'index'])
+     ->name('home');

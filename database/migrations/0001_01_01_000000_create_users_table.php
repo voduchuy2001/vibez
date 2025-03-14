@@ -4,11 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-<<<<<<< Updated upstream
 return new class () extends Migration {
-=======
-return new class extends Migration {
->>>>>>> Stashed changes
     /**
      * Run the migrations.
      */
