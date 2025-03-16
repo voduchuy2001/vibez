@@ -26,8 +26,8 @@
         <!-- Main Style -->
         <link rel="stylesheet" id="main_style" href="{{ asset('assets/css/home.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+        
         <!-- Scripts -->
-        @routes
         @viteReactRefresh
         @vite(['resources/js/app.jsx', "resources/js/pages/{$page['component']}.jsx"])
         @inertiaHead

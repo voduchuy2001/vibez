@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ return new class () extends Migration {
             $table->string('password');
             $table->tinyInteger('super_user')->default(0);
             $table->string('avatar')->nullable();
+            $table->string('status', 60)->default(UserStatus::ACTIVE->value);
             $table->rememberToken();
             $table->timestamps();
         });
