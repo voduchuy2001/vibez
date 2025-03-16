@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class SKU extends Model
+class Review extends Model
 {
-    protected $table = 'skus';
+    protected $table = 'reviews';
 
     protected $fillable = [
+        'customer_id',
         'product_id',
-        'code',
-        'price',
-        'stock',
+        'comment',
+        'star',
         'images',
         'status',
     ];
@@ -24,8 +23,8 @@ class SKU extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function attributeOptions(): BelongsToMany
+    public function customer(): BelongsTo
     {
-        return $this->belongsToMany(AttributeOption::class, 'attribute_option_skus', 'sku_id', 'attribute_option_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 }

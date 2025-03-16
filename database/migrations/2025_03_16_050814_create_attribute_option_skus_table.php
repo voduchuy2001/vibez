@@ -14,8 +14,8 @@ return new class () extends Migration {
     {
         Schema::create('attribute_option_skus', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(SKU::class);
-            $table->foreignIdFor(AttributeOption::class);
+            $table->foreignIdFor(SKU::class, 'sku_id');
+            $table->foreignIdFor(AttributeOption::class, 'attribute_option_id');
             $table->timestamps();
         });
     }

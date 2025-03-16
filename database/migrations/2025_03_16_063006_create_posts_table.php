@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\BaseStatus;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,6 +14,14 @@ return new class () extends Migration {
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class, 'author_id')->nullable();
+            $table->string('name');
+            $table->string('description', 400)->nullable();
+            $table->longText('content')->nullable();
+            $table->string('status')->default(BaseStatus::PUBLISHED->value);
+            $table->string('image')->nullable();
+            $table->integer('views')->default(0);
+            $table->tinyInteger('is_featured')->default(0);
             $table->timestamps();
         });
     }

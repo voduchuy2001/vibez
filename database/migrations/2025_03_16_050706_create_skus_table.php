@@ -14,11 +14,11 @@ return new class () extends Migration {
     {
         Schema::create('skus', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Product::class, 'product_id');
             $table->string('code')->unique();
             $table->integer('price');
             $table->integer('stock')->default(0);
-            $table->json('images')->nullable();
+            $table->text('images')->nullable();
             $table->string('status', 60)->default(BaseStatus::PUBLISHED->value);
             $table->timestamps();
         });
