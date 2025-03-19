@@ -1,8 +1,8 @@
 import InputError from "@/components/client/input-error";
-import InputLabel from "@/components/InputLabel";
+import InputLabel from "@/components/client/input-label";
 import PrimaryButton from "@/components/PrimaryButton";
-import TextInput from "@/components/TextInput";
-import GuestLayout from "@/layouts/GuestLayout";
+import TextInput from "@/components/client/text-input";
+import ClientLayout from "@/layouts/client-layout";
 import { Head, useForm } from "@inertiajs/react";
 
 export default function ResetPassword({ token, email }) {
@@ -22,7 +22,7 @@ export default function ResetPassword({ token, email }) {
     };
 
     return (
-        <GuestLayout>
+        <ClientLayout>
             <Head title="Reset Password" />
 
             <form onSubmit={submit}>
@@ -89,6 +89,6 @@ export default function ResetPassword({ token, email }) {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        </ClientLayout>
     );
 }

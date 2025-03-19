@@ -11,6 +11,16 @@ import BackToTop from "./client/back-to-top";
 import Announcement from "./client/announcement";
 
 export default function ClientLayout({ children }) {
+    $(".gi-site-menu-icon").on("click", function () {
+        $(".gi-mobile-menu-overlay").fadeIn();
+        $(".gi-mobile-menu").addClass("gi-menu-open");
+    });
+
+    $(".gi-mobile-menu-overlay, .gi-close-menu").on("click", function () {
+        $(".gi-mobile-menu-overlay").fadeOut();
+        $(".gi-mobile-menu").removeClass("gi-menu-open");
+    });
+
     return (
         <Fragment>
             <Overlay />

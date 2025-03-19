@@ -1,4 +1,5 @@
 import Button from "@/components/client/button";
+import Checkbox from "@/components/client/checkbox";
 import InputError from "@/components/client/input-error";
 import InputLabel from "@/components/client/input-label";
 import TextInput from "@/components/client/text-input";
@@ -99,20 +100,34 @@ export default function Login({ status, canResetPassword }) {
                                                     message={errors.password}
                                                 />
                                             </span>
-                                            {canResetPassword && (
-                                                <span className="gi-login-wrap flex flex-col gi-login-fp">
-                                                    <label className="mb-[0] text-[#4b5966] text-[15px] font-medium tracking-[0] leading-[1]">
-                                                        <Link
-                                                            href={route(
-                                                                "password.request",
-                                                            )}
-                                                            className="mt-[10px] text-[#777] text-[14px] font-normal tracking-[0] flex justify-end"
-                                                        >
-                                                            Forgot Password?
-                                                        </Link>
-                                                    </label>
-                                                </span>
-                                            )}
+
+                                            <div className="flex items-center justify-between w-full">
+                                                <Checkbox
+                                                    checked={data.remember}
+                                                    onChange={(checked) =>
+                                                        setData(
+                                                            "remember",
+                                                            checked,
+                                                        )
+                                                    }
+                                                    label="Remember me"
+                                                />
+
+                                                {canResetPassword && (
+                                                    <span className="gi-login-wrap flex flex-col gi-login-fp">
+                                                        <label className="mb-[0] text-[#4b5966] text-[15px] font-medium tracking-[0] leading-[1]">
+                                                            <Link
+                                                                href={route(
+                                                                    "password.request",
+                                                                )}
+                                                                className="mt-[10px] text-[#777] text-[14px] font-normal tracking-[0] flex justify-end"
+                                                            >
+                                                                Forgot Password?
+                                                            </Link>
+                                                        </label>
+                                                    </span>
+                                                )}
+                                            </div>
 
                                             <span className="gi-login-wrap gi-login-btn mt-[30px] flex flex-row justify-between items-center">
                                                 <span className="text-[#777] text-[14px]">

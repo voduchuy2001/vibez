@@ -1,8 +1,8 @@
 import InputError from "@/components/client/input-error";
-import InputLabel from "@/components/InputLabel";
+import InputLabel from "@/components/client/input-error";
 import PrimaryButton from "@/components/PrimaryButton";
-import TextInput from "@/components/TextInput";
-import GuestLayout from "@/layouts/GuestLayout";
+import TextInput from "@/components/client/text-input";
+import ClientLayout from "@/layouts/client-layout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Register() {
@@ -22,7 +22,7 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
+        <ClientLayout>
             <Head title="Register" />
 
             <form onSubmit={submit}>
@@ -115,6 +115,6 @@ export default function Register() {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        </ClientLayout>
     );
 }

@@ -57,7 +57,7 @@ export default function MobileMenubar() {
                         <ul>
                             <li className="dropdown relative drop-list">
                                 <a
-                                    href="javascript:void(0)"
+                                    href="#!"
                                     className="dropdown-arrow mb-[12px] p-[12px] block capitalize text-[#777] border-[1px] border-solid border-[#eee] rounded-[5px] text-[15px] font-medium"
                                 >
                                     Home
@@ -75,7 +75,7 @@ export default function MobileMenubar() {
                             </li>
                             <li className="relative">
                                 <a
-                                    href="javascript:void(0)"
+                                    href="#!"
                                     className="dropdown-arrow mb-[12px] p-[12px] block capitalize text-[#777] border-[1px] border-solid border-[#eee] rounded-[5px] text-[15px] font-medium"
                                 >
                                     Categories
@@ -83,7 +83,7 @@ export default function MobileMenubar() {
                                 <ul className="sub-menu w-full min-w-[auto] p-0 mb-[10px] static hidden visible transition-none opacity-[1]">
                                     <li className="relative">
                                         <a
-                                            href="javascript:void(0)"
+                                            href="#!"
                                             className="mb-[0] pl-[15px] pr-[0] py-[12px] capitalize block text-[14px] font-normal text-[#777]"
                                         >
                                             Classic Variation
