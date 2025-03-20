@@ -37,22 +37,6 @@ export default function Footer() {
                                         products. Get your daily needs from our
                                         store.
                                     </p>
-                                    <div className="gi-app-store mb-[30px] flex flex-row max-[1199px]:flex-col max-[991px]:flex-row max-[320px]:flex-col">
-                                        <a href="#" className="app-img">
-                                            <img
-                                                src="assets/img/app/android.png"
-                                                className="adroid max-w-[140px] max-[1399px]:max-w-[120px] mb-[15px] rounded-[5px] mr-[15px]"
-                                                alt="apple"
-                                            />
-                                        </a>
-                                        <a href="#" className="app-img">
-                                            <img
-                                                src="assets/img/app/apple.png"
-                                                className="apple max-w-[140px] max-[1399px]:max-w-[120px] mb-[15px] rounded-[5px]"
-                                                alt="apple"
-                                            />
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                             <div

@@ -1,4 +1,5 @@
 import ClientLayout from "@/layouts/client-layout";
+import { Head } from "@inertiajs/react";
 
 export default function Index() {
     $(".loc-list").on("click", function () {
@@ -17,5 +18,9 @@ export default function Index() {
         $(".gi-mobile-menu").removeClass("gi-menu-open");
     });
 
-    return <ClientLayout>xin chao cac ban</ClientLayout>;
+    return (
+        <ClientLayout>
+            <Head title="Home" />
+        </ClientLayout>
+    );
 }

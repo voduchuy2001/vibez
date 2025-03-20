@@ -59,7 +59,7 @@ export default function CartSidebar() {
                                             className="qty-input"
                                             type="text"
                                             name="gi-qtybtn"
-                                            value="1"
+                                            defaultValue="1"
                                         />
                                     </div>
                                     <a

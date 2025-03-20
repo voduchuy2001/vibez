@@ -45,7 +45,7 @@ export default function ClientLayout({ children }) {
 
             <BackToTop />
 
-            <Announcement />
+            {/* <Announcement /> */}
         </Fragment>
     );
 }

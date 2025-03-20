@@ -1,5 +1,5 @@
 import MiniCartHeader from "./mini-cart-header";
-import Lang from "./lang";
+import HeaderTopRight from "./header-top-right";
 
 export default function TopHeader() {
     return (
@@ -18,15 +18,6 @@ export default function TopHeader() {
                                     </a>
                                     +91 987 654 3210
                                 </li>
-                                <li className="list-inline-item transition-all duration-[0.3s] ease-in-out flex text-[13px]">
-                                    <a
-                                        href="#!"
-                                        className="mx-[5px] text-center flex items-center justify-center text-[15px]"
-                                    >
-                                        <i className="fi fi-brands-whatsapp transition-all duration-[0.3s] ease-in-out text-[#777]"></i>
-                                    </a>
-                                    +91 987 654 3210
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -37,7 +28,7 @@ export default function TopHeader() {
                         </div>
                     </div>
 
-                    <Lang />
+                    <HeaderTopRight />
 
                     <MiniCartHeader />
                 </div>
