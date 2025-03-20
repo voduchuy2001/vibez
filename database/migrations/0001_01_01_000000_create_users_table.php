@@ -1,11 +1,11 @@
 <?php
 
+use App\Enums\UserStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->tinyInteger('super_user')->default(0);
+            $table->string('avatar')->nullable();
+            $table->string('status', 60)->default(UserStatus::ACTIVE->value);
             $table->rememberToken();
             $table->timestamps();
         });
