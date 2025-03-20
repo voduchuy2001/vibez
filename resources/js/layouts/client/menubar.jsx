@@ -478,7 +478,6 @@ export default function Menubar() {
                                                     href="shop-banner-left-sidebar-col-3.html"
                                                     className="transition-all duration-[0.3s] ease-in-out text-[15px] leading-[60px] capitalize text-[#4b5966] flex items-center font-medium"
                                                 >
-                                                    <i className="fi-rr-home transition-all duration-[0.3s] ease-in-out mr-[5px] text-[18px] text-[#4b5966] flex"></i>
                                                     Home
                                                 </a>
                                             </li>
@@ -488,7 +487,6 @@ export default function Menubar() {
                                                     href="shop-banner-left-sidebar-col-3.html"
                                                     className="transition-all duration-[0.3s] ease-in-out text-[15px] leading-[60px] capitalize text-[#4b5966] flex items-center font-medium"
                                                 >
-                                                    <i className="fi-rr-shop transition-all duration-[0.3s] ease-in-out mr-[5px] text-[18px] text-[#4b5966] flex"></i>
                                                     Shop
                                                 </a>
                                             </li>
@@ -498,7 +496,6 @@ export default function Menubar() {
                                                     href="shop-banner-left-sidebar-col-3.html"
                                                     className="transition-all duration-[0.3s] ease-in-out text-[15px] leading-[60px] capitalize text-[#4b5966] flex items-center font-medium"
                                                 >
-                                                    <i className="fi-rr-address-book transition-all duration-[0.3s] ease-in-out mr-[5px] text-[18px] text-[#4b5966] flex"></i>
                                                     Contact
                                                 </a>
                                             </li>
@@ -508,7 +505,6 @@ export default function Menubar() {
                                                     href="shop-banner-left-sidebar-col-3.html"
                                                     className="transition-all duration-[0.3s] ease-in-out text-[15px] leading-[60px] capitalize text-[#4b5966] flex items-center font-medium"
                                                 >
-                                                    <i className="fi-rr-info transition-all duration-[0.3s] ease-in-out mr-[5px] text-[18px] text-[#4b5966] flex"></i>
                                                     About Us
                                                 </a>
                                             </li>
