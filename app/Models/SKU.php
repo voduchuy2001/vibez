@@ -13,10 +13,17 @@ class SKU extends Model
     protected $fillable = [
         'product_id',
         'code',
+        'is_default',
         'price',
         'stock',
         'images',
         'status',
+    ];
+
+    protected $casts = [
+        'is_default' => 'boolean',
+        'price' => 'integer',
+        'stock' => 'integer',
     ];
 
     public function product(): BelongsTo

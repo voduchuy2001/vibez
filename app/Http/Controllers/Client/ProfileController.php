@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ProfileUpdateRequest;
@@ -19,7 +19,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('auth/profile/edit', [
+        return Inertia::render('client/profile/edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);

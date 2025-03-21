@@ -16,6 +16,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignIdFor(Product::class, 'product_id');
             $table->string('code')->unique();
+            $table->tinyInteger('is_default')->default(0);
             $table->integer('price');
             $table->integer('stock')->default(0);
             $table->text('images')->nullable();
