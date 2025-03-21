@@ -1,6 +1,7 @@
 import {
     BellPlus,
     Book,
+    EarthIcon,
     Home,
     LayoutGrid,
     Package,
@@ -27,7 +28,7 @@ const data = {
     navMain: [
         {
             title: "Dashboard",
-            url: "#",
+            url: route("dashboard"),
             icon: Home,
         },
         {
@@ -58,6 +59,11 @@ const data = {
     ],
 
     navSecondary: [
+        {
+            title: "Website client",
+            url: route("home"),
+            icon: EarthIcon,
+        },
         {
             title: "Settings",
             url: "#",

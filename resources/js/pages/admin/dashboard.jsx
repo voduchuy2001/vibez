@@ -6,7 +6,7 @@ export default function Dashboard() {
     return (
         <DashboardLayout>
             <Head title="Dashboard" />
-            <SiteHeader />
+            <SiteHeader headerName="Dashboard" />
         </DashboardLayout>
     );
 }
