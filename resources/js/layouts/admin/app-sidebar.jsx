@@ -1,12 +1,13 @@
 import {
-    BellPlus,
-    Book,
+    BellIcon,
+    BookMarked,
     EarthIcon,
     Home,
     LayoutGrid,
     Package,
     SearchIcon,
     SettingsIcon,
+    Star,
     UsersIcon,
 } from "lucide-react";
 
@@ -42,14 +43,19 @@ const data = {
             icon: Package,
         },
         {
+            title: "Reviews",
+            url: "#",
+            icon: Star,
+        },
+        {
             title: "Posts",
             url: "#",
-            icon: Book,
+            icon: BookMarked,
         },
         {
             title: "Announcements",
             url: "#",
-            icon: BellPlus,
+            icon: BellIcon,
         },
         {
             title: "Users",
