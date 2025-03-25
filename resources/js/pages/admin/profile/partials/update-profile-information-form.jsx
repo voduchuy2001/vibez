@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Link, useForm, usePage } from "@inertiajs/react";
-import toast from "react-hot-toast";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -22,10 +21,7 @@ export default function UpdateProfileInformation({
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route("admin.profile.update"), {
-            onSuccess: () =>
-                toast.success("Profile information updated successfully."),
-        });
+        patch(route("admin.profile.update"));
     };
 
     return (

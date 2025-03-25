@@ -12,8 +12,8 @@ export function NavMain({ items }) {
         <SidebarGroup>
             <SidebarGroupContent className="flex flex-col gap-2">
                 <SidebarMenu>
-                    {items.map((item) => (
-                        <Link href={item.url}>
+                    {items.map((item, index) => (
+                        <Link href={item.url} key={`nav-main-${index}`}>
                             <SidebarMenuItem key={item.title}>
                                 <SidebarMenuButton tooltip={item.title}>
                                     {item.icon && <item.icon />}

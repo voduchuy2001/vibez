@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "@inertiajs/react";
 import { useRef } from "react";
-import toast from "react-hot-toast";
 
 export default function DeleteUserForm({ className = "" }) {
     const passwordInput = useRef();
@@ -38,7 +37,6 @@ export default function DeleteUserForm({ className = "" }) {
             preserveScroll: true,
             onError: () => passwordInput.current.focus(),
             onFinish: () => reset(),
-            onSuccess: () => toast.success("Account deleted successfully."),
         });
     };
 

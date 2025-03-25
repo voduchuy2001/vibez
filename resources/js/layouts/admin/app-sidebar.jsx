@@ -1,13 +1,13 @@
 import {
-    BellIcon,
-    BookMarked,
     EarthIcon,
     Home,
+    KeyRoundIcon,
     LayoutGrid,
+    NewspaperIcon,
     Package,
-    SearchIcon,
     SettingsIcon,
     Star,
+    TagsIcon,
     UsersIcon,
 } from "lucide-react";
 
@@ -34,33 +34,33 @@ const data = {
         },
         {
             title: "Categories",
-            url: "#",
-            icon: LayoutGrid,
+            url: route("admin.category.index"),
+            icon: TagsIcon,
         },
         {
             title: "Products",
-            url: "#",
+            url: route("admin.product.index"),
             icon: Package,
         },
         {
             title: "Reviews",
-            url: "#",
+            url: route("admin.review.index"),
             icon: Star,
         },
         {
             title: "Posts",
-            url: "#",
-            icon: BookMarked,
-        },
-        {
-            title: "Announcements",
-            url: "#",
-            icon: BellIcon,
+            url: route("admin.post.index"),
+            icon: NewspaperIcon,
         },
         {
             title: "Users",
-            url: "#",
+            url: route("admin.user.index"),
             icon: UsersIcon,
+        },
+        {
+            title: "Roles",
+            url: route("admin.role.index"),
+            icon: KeyRoundIcon,
         },
     ],
 
@@ -72,13 +72,8 @@ const data = {
         },
         {
             title: "Settings",
-            url: "#",
+            url: route("admin.setting.index"),
             icon: SettingsIcon,
-        },
-        {
-            title: "Search",
-            url: "#",
-            icon: SearchIcon,
         },
     ],
 };

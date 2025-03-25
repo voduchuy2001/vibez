@@ -7,11 +7,15 @@ import DeleteUserForm from "./partials/delete-user-form";
 
 export default function Edit() {
     const { auth: user } = usePage().props;
+    const breadcrumbs = [
+        { href: route("dashboard"), label: "Dashboard" },
+        { label: "Profile" },
+    ];
 
     return (
         <DashboardLayout>
             <Head title={`Edit Profile: ${user.name}`} />
-            <SiteHeader headerName={`Edit Profile: ${user.name}`} />
+            <SiteHeader breadcrumbs={breadcrumbs} />
 
             <div className="flex flex-1 flex-col">
                 <div className="@container/main flex flex-1 flex-col gap-2">
