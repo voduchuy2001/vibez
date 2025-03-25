@@ -23,10 +23,11 @@ export default function DashboardLayout({ children }) {
 
     return (
         <SidebarProvider>
-            <AppSidebar variant="inset" />
-            <SidebarInset>{children}</SidebarInset>
-
             <Toaster />
+
+            <AppSidebar variant="inset" />
+
+            <SidebarInset>{children}</SidebarInset>
         </SidebarProvider>
     );
 }

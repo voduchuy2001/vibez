@@ -35,7 +35,11 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('admin.profile.edit');
+        return Redirect::route('admin.profile.edit')->with([
+           'type' => 'success',
+           'message' => trans('message.success'),
+        ]);
+        ;
     }
 
     /**
@@ -56,6 +60,10 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')->with([
+           'type' => 'success',
+           'message' => trans('message.success'),
+        ]);
+        ;
     }
 }

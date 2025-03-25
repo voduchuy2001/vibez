@@ -24,6 +24,7 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->group(function () {
     Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
 
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
 
     Route::get('/review', [ReviewController::class, 'index'])->name('admin.review.index');
 
