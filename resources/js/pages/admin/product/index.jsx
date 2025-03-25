@@ -1,5 +1,5 @@
 import { SiteHeader } from "@/layouts/admin/site-header";
-import DashboardLayout from "@/layouts/dashboard-layout";
+import AdminLayout from "@/layouts/admin-layout";
 import { Head } from "@inertiajs/react";
 import React from "react";
 import DataTable from "./partials/data-table";
@@ -11,8 +11,8 @@ export default function index() {
     ];
 
     return (
-        <DashboardLayout>
-            <Head title="Product" />
+        <AdminLayout>
+            <Head title="Products" />
             <SiteHeader breadcrumbs={breadcrumbs} />
 
             <div className="flex flex-1 flex-col">
@@ -24,6 +24,6 @@ export default function index() {
                     </div>
                 </div>
             </div>
-        </DashboardLayout>
+        </AdminLayout>
     );
 }

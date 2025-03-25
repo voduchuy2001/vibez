@@ -12,25 +12,30 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('permission:dashboard.view');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit')->middleware('permission:profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update')->middleware('permission:profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy')->middleware('permission:profile.destroy');
 
-    Route::get('/setting', [SettingController::class, 'index'])->name('admin.setting.index');
+    Route::get('/setting', [SettingController::class, 'index'])->name('admin.setting.index')->middleware('permission:setting.index');
 
-    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category.index');
-    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
+    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category.index')->middleware('permission:category.index');
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy')->middleware('permission:category.destroy');
 
-    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
-    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
+    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index')->middleware('permission:product.index');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy')->middleware('permission:product.destroy');
 
-    Route::get('/review', [ReviewController::class, 'index'])->name('admin.review.index');
+    Route::get('/review', [ReviewController::class, 'index'])->name('admin.review.index')->middleware('permission:review.index');
+    Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('admin.review.destroy')->middleware('permission:review.destroy');
 
-    Route::get('/post', [PostController::class, 'index'])->name('admin.post.index');
+    Route::get('/post', [PostController::class, 'index'])->name('admin.post.index')->middleware('permission:post.index');
+    Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('admin.post.destroy')->middleware('permission:post.destroy');
 
-    Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
+    Route::get('/user', [UserController::class, 'index'])->name('admin.user.index')->middleware('permission:user.index');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy')->middleware('permission:user.destroy');
 
-    Route::get('/role', [RoleController::class, 'index'])->name('admin.role.index');
+    Route::get('/role', [RoleController::class, 'index'])->name('admin.role.index')->middleware('permission:role.index');
+    Route::delete('/role/{id}', [RoleController::class, 'destroy'])->name('admin.role.destroy')->middleware('permission:role.destroy');
+
 });

@@ -8,121 +8,36 @@ use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
+    private function buildData(?int $parentId, string $name, string $slug, int $order): array
+    {
+        return [
+             'parent_id' => $parentId,
+            'name' => $name,
+            'image' => "categories/{$slug}.jpg",
+            'icon_image' => "categories/icons/{$slug}.png",
+            'description' => "{$name} cao cấp",
+            'status' => BaseStatus::PUBLISHED->value,
+            'order' => $order,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+    }
+
     public function run(): void
     {
         $categories = [
-            [
-                'parent_id' => null,
-                'name' => 'Thời trang nam',
-                'image' => 'categories/men-fashion.jpg',
-                'icon_image' => 'categories/icons/men-fashion.png',
-                'description' => 'Thời trang dành cho nam giới',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 1,
-            ],
-            [
-                'parent_id' => null,
-                'name' => 'Thời trang nữ',
-                'image' => 'categories/women-fashion.jpg',
-                'icon_image' => 'categories/icons/women-fashion.png',
-                'description' => 'Thời trang dành cho nữ giới',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 2,
-            ],
-            [
-                'parent_id' => null,
-                'name' => 'Phụ kiện',
-                'image' => 'categories/accessories.jpg',
-                'icon_image' => 'categories/icons/accessories.png',
-                'description' => 'Phụ kiện thời trang cao cấp',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 3,
-            ],
-            [
-                'parent_id' => null,
-                'name' => 'Giày dép',
-                'image' => 'categories/shoes.jpg',
-                'icon_image' => 'categories/icons/shoes.png',
-                'description' => 'Các loại giày dép nam nữ',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 4,
-            ],
-
-            [
-                'parent_id' => 1,
-                'name' => 'Áo sơ mi nam',
-                'image' => 'categories/men-shirts.jpg',
-                'icon_image' => 'categories/icons/men-shirts.png',
-                'description' => 'Các loại áo sơ mi nam lịch lãm',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 5,
-            ],
-            [
-                'parent_id' => 1,
-                'name' => 'Quần jeans nam',
-                'image' => 'categories/men-jeans.jpg',
-                'icon_image' => 'categories/icons/men-jeans.png',
-                'description' => 'Quần jeans nam phong cách',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 6,
-            ],
-
-            [
-                'parent_id' => 2,
-                'name' => 'Váy đầm',
-                'image' => 'categories/women-dresses.jpg',
-                'icon_image' => 'categories/icons/women-dresses.png',
-                'description' => 'Các mẫu váy đầm sang trọng',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 7,
-            ],
-            [
-                'parent_id' => 2,
-                'name' => 'Quần jeans nữ',
-                'image' => 'categories/women-jeans.jpg',
-                'icon_image' => 'categories/icons/women-jeans.png',
-                'description' => 'Quần jeans nữ trẻ trung',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 8,
-            ],
-
-            [
-                'parent_id' => 3,
-                'name' => 'Túi xách',
-                'image' => 'categories/bags.jpg',
-                'icon_image' => 'categories/icons/bags.png',
-                'description' => 'Túi xách thời trang',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 9,
-            ],
-            [
-                'parent_id' => 3,
-                'name' => 'Kính mát',
-                'image' => 'categories/sunglasses.jpg',
-                'icon_image' => 'categories/icons/sunglasses.png',
-                'description' => 'Kính mát cao cấp',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 10,
-            ],
-
-            [
-                'parent_id' => 4,
-                'name' => 'Giày thể thao',
-                'image' => 'categories/sneakers.jpg',
-                'icon_image' => 'categories/icons/sneakers.png',
-                'description' => 'Giày thể thao nam nữ',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 11,
-            ],
-            [
-                'parent_id' => 4,
-                'name' => 'Dép sandal',
-                'image' => 'categories/sandals.jpg',
-                'icon_image' => 'categories/icons/sandals.png',
-                'description' => 'Dép sandal phong cách',
-                'status' => BaseStatus::PUBLISHED->value,
-                'order' => 12,
-            ],
+           $this->buildData(null, 'Men fashion', 'men-fashion', 1),
+           $this->buildData(null, 'Women fashion', 'women-fashion', 2),
+           $this->buildData(null, 'Accessories', 'accessories', 3),
+           $this->buildData(null, 'Shoes', 'shoes', 4),
+           $this->buildData(1, 'Men Shirts', 'men-shirts', 5),
+           $this->buildData(1, 'Men jeans', 'men-jeans', 6),
+           $this->buildData(2, 'Women dresses', 'women-dresses', 7),
+           $this->buildData(2, 'Women jeans', 'women-jeans', 8),
+           $this->buildData(3, 'Bags', 'bags', 9),
+           $this->buildData(3, 'Sunglasses', 'sunglasses', 10),
+           $this->buildData(4, 'Sneakers', 'sneakers', 11),
+           $this->buildData(4, 'Sandals', 'sandals', 12),
         ];
 
         foreach ($categories as $category) {

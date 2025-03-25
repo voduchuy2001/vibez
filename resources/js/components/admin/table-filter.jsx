@@ -71,7 +71,7 @@ const FilterOptions = ({ options, params, filter, onSelectFilter }) => (
                             className={cn(
                                 "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
                                 isSelected
-                                    ? "bg-gray-900 text-white"
+                                    ? "bg-green-700 text-white"
                                     : "opacity-50 [&_svg]:invisible",
                             )}
                         >
@@ -148,7 +148,7 @@ export default function TableFilter({
                 <Button
                     variant="outline"
                     size="sm"
-                    className="w-full md:w-auto h-8 border-dashed border-gray-400 text-xs hover:bg-gray-200/50"
+                    className="h-8 border-dashed"
                 >
                     <CirclePlusIcon className="mr-2 h-4 w-4" />
                     {title}
@@ -160,9 +160,12 @@ export default function TableFilter({
                     )}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-full md:w-[200px] p-0" align="start">
+            <PopoverContent className="w-[200px] p-0" align="start">
                 <Command>
-                    <CommandInput placeholder={title} />
+                    <CommandInput
+                        className="border-0 focus:ring-0"
+                        placeholder={title}
+                    />
                     <FilterOptions
                         options={options}
                         params={params}

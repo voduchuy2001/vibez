@@ -48,6 +48,7 @@ const SearchInput = ({
     setTimeDebounce,
 }) => (
     <Input
+        type="search"
         placeholder={placeholder || "Search"}
         className="h-8 w-full lg:w-[250px] text-xs"
         value={search || ""}

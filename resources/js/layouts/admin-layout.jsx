@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { XCircleIcon } from "lucide-react";
 
-export default function DashboardLayout({ children }) {
+export default function AdminLayout({ children }) {
     const { flash } = usePage().props;
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function DashboardLayout({ children }) {
         <SidebarProvider>
             <Toaster />
 
-            <AppSidebar variant="inset" />
+            <AppSidebar />
 
             <SidebarInset>{children}</SidebarInset>
         </SidebarProvider>

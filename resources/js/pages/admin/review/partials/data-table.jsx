@@ -1,6 +1,5 @@
 import TableFilter from "@/components/admin/table-filter";
 import TablePagination from "@/components/admin/table-pagination";
-import TableSortHeader from "@/components/admin/table-sort-header";
 import TableToolbar from "@/components/admin/table-toolbar";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,16 +17,17 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import useDebouncedSearch from "@/hooks/use-debounced-search";
-import useSorting from "@/hooks/use-sorting";
 import { usePage } from "@inertiajs/react";
-import { MoreHorizontal } from "lucide-react";
-import { useState } from "react";
-import DeleteCategoryDialog from "./delete-category-dialog";
+import { MoreHorizontal, StarIcon } from "lucide-react";
 import EmptyState from "@/components/admin/empty-state";
+import DeleteProductDialog from "./delete-review-dialog";
+import { useState } from "react";
+import useSorting from "@/hooks/use-sorting";
+import TableSortHeader from "@/components/admin/table-sort-header";
 import { formatDate } from "@/utils/format-date";
 
 export default function DataTable() {
-    const { data: categories, links, meta } = usePage().props.categories;
+    const { data: reviews, links, meta } = usePage().props.reviews;
     const { filters } = usePage().props;
     const { params, setParams, setTimeDebounce } = useDebouncedSearch(
         route(route().current()),
@@ -54,14 +54,13 @@ export default function DataTable() {
         },
     ];
 
-    const [showDeleteCategoryDialog, setShowDeleteCategoryDialog] =
-        useState(false);
-    const [categoryId, setCategoryId] = useState(null);
+    const [showDeleteReviewDialog, setShowDeleteReviewDialog] = useState(false);
+    const [reviewId, setReviewId] = useState(null);
 
     return (
         <div className="space-y-4">
             <TableToolbar
-                placeholder="Search categories"
+                placeholder="Search reviews"
                 search={params?.search}
                 params={params}
                 setParams={setParams}
@@ -81,22 +80,22 @@ export default function DataTable() {
             <Table>
                 <TableHeader className="uppercase text-xs">
                     <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Parent</TableHead>
-                        <TableHead>Description</TableHead>
-                        <TableHead>Status</TableHead>
+                        <TableHead>Product</TableHead>
+                        <TableHead>User</TableHead>
                         <TableHead className="w-10">
                             <TableSortHeader
-                                title="Order"
+                                title="Star"
                                 onClick={() => {
                                     setTimeDebounce(50);
-                                    sort("order");
+                                    sort("star");
                                 }}
                                 sort={
-                                    params.col === "order" ? params.sort : null
+                                    params.col === "star" ? params.sort : null
                                 }
                             />
                         </TableHead>
+                        <TableHead>Comment</TableHead>
+                        <TableHead>Status</TableHead>
                         <TableHead className="w-10">
                             <TableSortHeader
                                 title="Created At"
@@ -115,19 +114,36 @@ export default function DataTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {categories.length > 0 ? (
-                        categories.map((category, index) => (
+                    {reviews.length > 0 ? (
+                        reviews.map((review, index) => (
                             <TableRow
-                                key={`category-table-${index}`}
+                                key={`review-table-${index}`}
                                 className="bg-white"
                             >
-                                <TableCell>{category.name}</TableCell>
-                                <TableCell>{category?.parent?.name}</TableCell>
-                                <TableCell>{category.description}</TableCell>
+                                <TableCell>{review.product.name}</TableCell>
+                                <TableCell>{review.customer.name}</TableCell>
+                                <TableCell className="text-center">
+                                    <div className="flex items-center justify-center gap-1">
+                                        {Array.from({ length: 5 }, (_, i) => (
+                                            <StarIcon
+                                                key={i}
+                                                size={16}
+                                                className={
+                                                    i < review.star
+                                                        ? "text-yellow-500"
+                                                        : "text-gray-300"
+                                                }
+                                            />
+                                        ))}
+                                    </div>
+                                </TableCell>
+                                <TableCell className="break-words w-5/12">
+                                    {review.comment}
+                                </TableCell>
                                 <TableCell>
                                     {status.map(
                                         (item) =>
-                                            category.status.toLowerCase() ===
+                                            review.status.toLowerCase() ===
                                                 item.value && (
                                                 <span
                                                     key={item.value}
@@ -139,10 +155,7 @@ export default function DataTable() {
                                     )}
                                 </TableCell>
                                 <TableCell className="text-center">
-                                    {category.order}
-                                </TableCell>
-                                <TableCell className="text-center">
-                                    {formatDate(category.created_at)}
+                                    {formatDate(review.created_at)}
                                 </TableCell>
                                 <TableCell>
                                     <DropdownMenu>
@@ -164,10 +177,10 @@ export default function DataTable() {
 
                                             <DropdownMenuItem
                                                 onClick={() => {
-                                                    setShowDeleteCategoryDialog(
+                                                    setShowDeleteReviewDialog(
                                                         true,
                                                     );
-                                                    setCategoryId(category.id);
+                                                    setReviewId(review.id);
                                                 }}
                                             >
                                                 Delete
@@ -191,11 +204,11 @@ export default function DataTable() {
             </Table>
             <TablePagination links={links} meta={meta} />
 
-            {showDeleteCategoryDialog && (
-                <DeleteCategoryDialog
-                    open={showDeleteCategoryDialog}
-                    onOpenChange={setShowDeleteCategoryDialog}
-                    categoryId={categoryId}
+            {showDeleteReviewDialog && (
+                <DeleteProductDialog
+                    open={showDeleteReviewDialog}
+                    onOpenChange={setShowDeleteReviewDialog}
+                    reviewId={reviewId}
                     showTrigger={false}
                 />
             )}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QueryParamsRequest;
 use App\Services\Interfaces\ProductServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +19,7 @@ class ProductController extends Controller
         $this->productService =  $productService;
     }
 
-    public function index(): Response
+    public function index(QueryParamsRequest $request): Response
     {
         $products = $this->productService->index();
 
@@ -33,7 +34,7 @@ class ProductController extends Controller
 
         return Redirect::back()->with([
            'type' => 'success',
-           'message' => trans('message.success'),
+           'message' => trans('Delete product success'),
         ]);
     }
 }

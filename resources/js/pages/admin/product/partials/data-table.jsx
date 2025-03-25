@@ -23,6 +23,9 @@ import EmptyState from "@/components/admin/empty-state";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DeleteProductDialog from "./delete-product-dialog";
 import { useState } from "react";
+import { formatDate } from "@/utils/format-date";
+import TableSortHeader from "@/components/admin/table-sort-header";
+import useSorting from "@/hooks/use-sorting";
 
 export default function DataTable() {
     const { data: products, links, meta } = usePage().props.products;
@@ -32,18 +35,23 @@ export default function DataTable() {
         filters,
     );
 
+    const { sort } = useSorting(filters, setParams);
+
     const status = [
         {
-            value: "Published",
+            value: "published",
             label: "Published",
+            color: "green",
         },
         {
-            value: "Pending",
+            value: "pending",
             label: "Pending",
+            color: "yellow",
         },
         {
-            value: "Draft",
+            value: "draft",
             label: "Draft",
+            color: "red",
         },
     ];
 
@@ -72,12 +80,26 @@ export default function DataTable() {
             </div>
 
             <Table>
-                <TableHeader>
+                <TableHeader className="uppercase text-xs">
                     <TableRow>
                         <TableHead>Thumb</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Description</TableHead>
                         <TableHead>Status</TableHead>
+                        <TableHead className="w-10">
+                            <TableSortHeader
+                                title="Created At"
+                                onClick={() => {
+                                    setTimeDebounce(50);
+                                    sort("created_at");
+                                }}
+                                sort={
+                                    params.col === "created_at"
+                                        ? params.sort
+                                        : null
+                                }
+                            />
+                        </TableHead>
                         <TableHead></TableHead>
                     </TableRow>
                 </TableHeader>
@@ -89,35 +111,33 @@ export default function DataTable() {
                                 className="bg-white"
                             >
                                 <TableCell>
-                                    <Avatar>
-                                        <AvatarImage
-                                            className="rounded-md"
-                                            src={product.thumbnail}
-                                        />
-                                        <AvatarFallback>DC</AvatarFallback>
+                                    <Avatar className="rounded-md">
+                                        <AvatarImage src={product.thumbnail} />
+                                        <AvatarFallback className="rounded-md">
+                                            DC
+                                        </AvatarFallback>
                                     </Avatar>
                                 </TableCell>
                                 <TableCell>{product.name}</TableCell>
-                                <TableCell>{product.description}</TableCell>
+                                <TableCell className="break-words w-7/12">
+                                    {product.description}
+                                </TableCell>
                                 <TableCell>
-                                    {product.status === "Published" && (
-                                        <span className="inline-flex items-center rounded bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                                            Published
-                                        </span>
-                                    )}
-                                    {product.status === "Draft" && (
-                                        <span className="inline-flex items-center rounded bg-yellow-50 px-2 py-0.5 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
-                                            Draft
-                                        </span>
-                                    )}
-                                    {product.status === "Pending" && (
-                                        <span className="inline-flex items-center rounded bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
-                                            Pending
-                                        </span>
+                                    {status.map(
+                                        (item) =>
+                                            product.status.toLowerCase() ===
+                                                item.value && (
+                                                <span
+                                                    key={item.value}
+                                                    className={`inline-flex items-center rounded bg-${item.color}-50 px-2 py-0.5 text-xs font-medium text-${item.color}-700 ring-1 ring-inset ring-${item.color}-600/20`}
+                                                >
+                                                    {item.label}
+                                                </span>
+                                            ),
                                     )}
                                 </TableCell>
                                 <TableCell className="text-center">
-                                    {product.order}
+                                    {formatDate(product.created_at)}
                                 </TableCell>
                                 <TableCell>
                                     <DropdownMenu>

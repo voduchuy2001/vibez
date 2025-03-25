@@ -21,14 +21,14 @@ class CategoryService implements CategoryServiceInterface
     public function index(): AnonymousResourceCollection
     {
         $sort = str_replace(
-            ['order'],
-            ['order'],
+            ['order', 'created_at'],
+            ['order', 'created_at'],
             request()->query('col')
         );
 
         $filters = str_replace(
             [
-                'status:Published', 'status:Pending', 'status:Draft',
+                'status:published', 'status:pending', 'status:draft',
             ],
             [
                 'status:published', 'status:pending', 'status:draft',
@@ -42,7 +42,7 @@ class CategoryService implements CategoryServiceInterface
             ->applyFilters($filters)
             ->allowedFilters(['status:published', 'status:pending', 'status:draft'])
             ->applySort($sort)
-            ->allowedSorts(['order'])
+            ->allowedSorts(['order', 'created_at'])
             ->make();
 
         return CategoryResource::collection($result);

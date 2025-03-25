@@ -37,9 +37,8 @@ class ProfileController extends Controller
 
         return Redirect::route('admin.profile.edit')->with([
            'type' => 'success',
-           'message' => trans('message.success'),
+           'message' => trans('Update profile success'),
         ]);
-        ;
     }
 
     /**
@@ -62,8 +61,7 @@ class ProfileController extends Controller
 
         return Redirect::to('/')->with([
            'type' => 'success',
-           'message' => trans('message.success'),
+           'message' => trans('Delete account success'),
         ]);
-        ;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Enums\BaseStatus;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,9 +20,10 @@ class CategoryResource extends JsonResource
             'image' => $this->image,
             'icon_image' => $this->icon_image,
             'description' => $this->description,
-            'status' => BaseStatus::tryFrom($this->status)->label(),
+            'status' => $this->status,
             'order' => $this->order,
-            'parent' => $this->whenLoaded('parent', fn () => new CategoryResource($this->parent))
+            'parent' => $this->whenLoaded('parent', fn () => new CategoryResource($this->parent)),
+            'created_at' => $this->created_at
         ];
     }
 }

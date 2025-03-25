@@ -82,7 +82,7 @@ export function AppSidebar({ ...props }) {
     const { auth: user } = usePage().props;
 
     return (
-        <Sidebar collapsible="offcanvas" {...props}>
+        <Sidebar collapsible="icon" variant="floating" {...props}>
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>

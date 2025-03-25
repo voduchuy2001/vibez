@@ -19,9 +19,16 @@ class ProductService implements ProductServiceInterface
 
     public function index(): AnonymousResourceCollection
     {
+        $sort = str_replace(
+            ['created_at'],
+            ['created_at'],
+            request()->query('col')
+        );
+
+
         $filters = str_replace(
             [
-                'status:Published', 'status:Pending', 'status:Draft',
+                 'status:published', 'status:pending', 'status:draft',
             ],
             [
                 'status:published', 'status:pending', 'status:draft',
@@ -33,6 +40,8 @@ class ProductService implements ProductServiceInterface
             ->searchable(['name', 'description', 'content'])
             ->applyFilters($filters)
             ->allowedFilters(['status:published', 'status:pending', 'status:draft'])
+            ->applySort($sort)
+            ->allowedSorts(['created_at'])
             ->make();
 
         return ProductResource::collection($result);

@@ -4,9 +4,13 @@ import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from "lucide-react";
 import React from "react";
 
 const SortIcon = ({ sort }) => {
-    if (sort === "desc") return <ArrowDownIcon className="ml-2 h-3.5 w-3.5" />;
-    if (sort === "asc") return <ArrowUpIcon className="ml-2 h-3.5 w-3.5" />;
-    return <ChevronsUpDownIcon className="ml-2 h-4 w-4" />;
+    const icons = {
+        desc: <ArrowDownIcon className="ml-2 h-3.5 w-3.5" />,
+        asc: <ArrowUpIcon className="ml-2 h-3.5 w-3.5" />,
+        default: <ChevronsUpDownIcon className="ml-2 h-3.5 w-3.5" />,
+    };
+
+    return icons[sort] || icons.default;
 };
 
 export default function TableSortHeader({ className, title, sort, ...props }) {
@@ -15,7 +19,7 @@ export default function TableSortHeader({ className, title, sort, ...props }) {
             <Button
                 variant="ghost"
                 size="sm"
-                className="flex items-center -ml-0.5 h-8 hover:bg-gray-200 border-none"
+                className="flex items-center -ml-0.5 h-8 hover:bg-gray-200 border-none text-xs uppercase"
                 {...props}
             >
                 <span>{title}</span>

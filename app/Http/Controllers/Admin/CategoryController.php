@@ -34,7 +34,7 @@ class CategoryController extends Controller
 
         return Redirect::back()->with([
            'type' => 'success',
-           'message' => trans('message.success'),
+           'message' => trans('Delete category success'),
         ]);
     }
 }

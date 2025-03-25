@@ -1,5 +1,5 @@
 import { SiteHeader } from "@/layouts/admin/site-header";
-import DashboardLayout from "@/layouts/dashboard-layout";
+import AdminLayout from "@/layouts/admin-layout";
 import { Head, usePage } from "@inertiajs/react";
 import UpdateProfileInformationForm from "./partials/update-profile-information-form";
 import UpdatePasswordForm from "./partials/update-password-form";
@@ -13,7 +13,7 @@ export default function Edit() {
     ];
 
     return (
-        <DashboardLayout>
+        <AdminLayout>
             <Head title={`Edit Profile: ${user.name}`} />
             <SiteHeader breadcrumbs={breadcrumbs} />
 
@@ -34,6 +34,6 @@ export default function Edit() {
                     </div>
                 </div>
             </div>
-        </DashboardLayout>
+        </AdminLayout>
     );
 }
