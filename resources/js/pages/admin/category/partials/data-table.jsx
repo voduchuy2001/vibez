@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/table";
 import useDebouncedSearch from "@/hooks/use-debounced-search";
 import useSorting from "@/hooks/use-sorting";
-import { usePage } from "@inertiajs/react";
-import { MoreHorizontal } from "lucide-react";
+import { Link, usePage } from "@inertiajs/react";
+import { MoreHorizontal, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import DeleteCategoryDialog from "./delete-category-dialog";
 import EmptyState from "@/components/admin/empty-state";
@@ -76,6 +76,12 @@ export default function DataTable() {
                     setParams={setParams}
                     setTimeDebounce={setTimeDebounce}
                 />
+
+                <Button asChild size="sm">
+                    <Link href={route("admin.category.create")}>
+                        <PlusIcon className="w-4 h-4" /> Create
+                    </Link>
+                </Button>
             </div>
 
             <Table>
@@ -159,7 +165,14 @@ export default function DataTable() {
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent align="end">
                                             <DropdownMenuItem>
-                                                Edit
+                                                <Link
+                                                    href={route(
+                                                        "admin.category.edit",
+                                                        { id: category.id },
+                                                    )}
+                                                >
+                                                    Edit
+                                                </Link>
                                             </DropdownMenuItem>
 
                                             <DropdownMenuItem

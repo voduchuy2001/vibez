@@ -2,27 +2,23 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\BaseStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+
         return [
-            //
+            'parent_id'    => ['nullable', 'integer', 'exists:categories,id'],
+            'name'         => ['required', 'string', 'max:255'],
+            'image'        => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'icon_image'   => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:1024'],
+            'description'  => ['nullable', 'string'],
+            'status'       => ['required', Rule::in(BaseStatus::class)],
+            'order'        => ['nullable', 'integer', 'min:0'],
         ];
     }
 }

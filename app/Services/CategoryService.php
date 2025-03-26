@@ -58,9 +58,8 @@ class CategoryService implements CategoryServiceInterface
         $this->category->create($data);
     }
 
-    public function update(int|string $id, $data): void
+    public function update(Category $category, $data): void
     {
-        $category = $this->category->findOrFail($id);
         $category->update($data);
     }
 
@@ -69,4 +68,10 @@ class CategoryService implements CategoryServiceInterface
         $category = $this->category->findOrFail($id);
         $category->delete();
     }
+
+    public function findById(string|int $id): Category
+    {
+        return $this->category->findOrFail($id);
+    }
+
 }

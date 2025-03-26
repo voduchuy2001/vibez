@@ -22,6 +22,10 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.category.index')->middleware('permission:category.index');
     Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy')->middleware('permission:category.destroy');
+    Route::get('/create-category', [CategoryController::class, 'create'])->name('admin.category.create')->middleware('permission:category.create');
+    Route::post('/category', [CategoryController::class, 'store'])->name('admin.category.store')->middleware('permission:category.store');
+    Route::get('/edit-category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit')->middleware('permission:category.edit');
+    Route::put('/category', [CategoryController::class, 'update'])->name('admin.category.update')->middleware('permission:category.update');
 
     Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index')->middleware('permission:product.index');
     Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy')->middleware('permission:product.destroy');
