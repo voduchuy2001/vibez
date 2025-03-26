@@ -1,3 +1,4 @@
+import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function BackToTop() {
@@ -29,7 +30,9 @@ export default function BackToTop() {
             ${visible ? "opacity-100 visible" : "opacity-0 invisible"}
             max-[767px]:bottom-[15px] max-[767px]:right-[15px]`}
         >
-            ⬆
+            <div className="flex items-center justify-center">
+                <ArrowUp className="w-4 h-4" />
+            </div>
         </button>
     );
 }

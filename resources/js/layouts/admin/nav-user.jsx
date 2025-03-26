@@ -21,6 +21,7 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar";
+import { Link } from "@inertiajs/react";
 
 export function NavUser({ user }) {
     const { isMobile } = useSidebar();
@@ -83,20 +84,31 @@ export function NavUser({ user }) {
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <UserCircleIcon />
-                                Your Profile
-                            </DropdownMenuItem>
+                            <Link href={route("admin.profile.edit")}>
+                                <DropdownMenuItem>
+                                    <UserCircleIcon />
+                                    Your Profile
+                                </DropdownMenuItem>
+                            </Link>
+
                             <DropdownMenuItem>
                                 <BellIcon />
                                 Notifications
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <LogOutIcon />
-                            Log out
-                        </DropdownMenuItem>
+
+                        <Link
+                            className="w-full"
+                            as="button"
+                            method="post"
+                            href={route("logout")}
+                        >
+                            <DropdownMenuItem>
+                                <LogOutIcon />
+                                Log out
+                            </DropdownMenuItem>
+                        </Link>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </SidebarMenuItem>

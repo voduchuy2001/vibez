@@ -1,7 +1,8 @@
+import Breadcrumbs from "@/components/admin/breadcrumbs";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-export function SiteHeader({ headerName }) {
+export function SiteHeader({ breadcrumbs }) {
     return (
         <header className="group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear">
             <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
@@ -10,7 +11,8 @@ export function SiteHeader({ headerName }) {
                     orientation="vertical"
                     className="mx-2 data-[orientation=vertical]:h-4"
                 />
-                <h1 className="text-base font-medium">{headerName}</h1>
+
+                {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
             </div>
         </header>
     );

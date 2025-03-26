@@ -1,12 +1,13 @@
 import {
-    BellPlus,
-    Book,
     EarthIcon,
     Home,
+    KeyRoundIcon,
     LayoutGrid,
+    NewspaperIcon,
     Package,
-    SearchIcon,
     SettingsIcon,
+    Star,
+    TagsIcon,
     UsersIcon,
 } from "lucide-react";
 
@@ -33,46 +34,46 @@ const data = {
         },
         {
             title: "Categories",
-            url: "#",
-            icon: LayoutGrid,
+            url: route("admin.category.index"),
+            icon: TagsIcon,
         },
         {
             title: "Products",
-            url: "#",
+            url: route("admin.product.index"),
             icon: Package,
         },
         {
-            title: "Posts",
-            url: "#",
-            icon: Book,
+            title: "Reviews",
+            url: route("admin.review.index"),
+            icon: Star,
         },
         {
-            title: "Announcements",
-            url: "#",
-            icon: BellPlus,
+            title: "Posts",
+            url: route("admin.post.index"),
+            icon: NewspaperIcon,
         },
         {
             title: "Users",
-            url: "#",
+            url: route("admin.user.index"),
             icon: UsersIcon,
+        },
+        {
+            title: "Roles and permissions",
+            url: route("admin.role.index"),
+            icon: KeyRoundIcon,
         },
     ],
 
     navSecondary: [
         {
-            title: "Website client",
+            title: "View website",
             url: route("home"),
             icon: EarthIcon,
         },
         {
             title: "Settings",
-            url: "#",
+            url: route("admin.setting.index"),
             icon: SettingsIcon,
-        },
-        {
-            title: "Search",
-            url: "#",
-            icon: SearchIcon,
         },
     ],
 };
@@ -81,7 +82,7 @@ export function AppSidebar({ ...props }) {
     const { auth: user } = usePage().props;
 
     return (
-        <Sidebar collapsible="offcanvas" {...props}>
+        <Sidebar collapsible="icon" variant="floating" {...props}>
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>

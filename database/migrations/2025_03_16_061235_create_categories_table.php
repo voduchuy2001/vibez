@@ -14,11 +14,11 @@ return new class () extends Migration {
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class, 'parent_id');
+            $table->foreignIdFor(Category::class, 'parent_id')->nullable();
             $table->string('name');
-            $table->string('image');
-            $table->string('icon_image');
-            $table->mediumText('description');
+            $table->string('image')->nullable();
+            $table->string('icon_image')->nullable();
+            $table->mediumText('description')->nullable();
             $table->string('status', 60)->default(BaseStatus::PUBLISHED->value);
             $table->integer('order')->default(0);
             $table->timestamps();
