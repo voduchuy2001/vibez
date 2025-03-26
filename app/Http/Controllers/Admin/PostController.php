@@ -33,7 +33,7 @@ class PostController extends Controller
 
         return Redirect::back()->with([
            'type' => 'success',
-           'message' => trans('Delete product success'),
+           'message' => trans('Delete post success'),
         ]);
     }
 }

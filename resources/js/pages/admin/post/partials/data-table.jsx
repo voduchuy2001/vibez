@@ -1,5 +1,6 @@
 import TableFilter from "@/components/admin/table-filter";
 import TablePagination from "@/components/admin/table-pagination";
+import TableSortHeader from "@/components/admin/table-sort-header";
 import TableToolbar from "@/components/admin/table-toolbar";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,17 +18,17 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import useDebouncedSearch from "@/hooks/use-debounced-search";
-import { usePage } from "@inertiajs/react";
-import { MoreHorizontal, StarIcon } from "lucide-react";
-import EmptyState from "@/components/admin/empty-state";
-import DeleteReviewDialog from "./delete-review-dialog";
-import { useState } from "react";
 import useSorting from "@/hooks/use-sorting";
-import TableSortHeader from "@/components/admin/table-sort-header";
+import { usePage } from "@inertiajs/react";
+import { MoreHorizontal } from "lucide-react";
+import { useState } from "react";
+import DeletePostDialog from "./delete-post-dialog";
+import EmptyState from "@/components/admin/empty-state";
 import { formatDate } from "@/utils/format-date";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function DataTable() {
-    const { data: reviews, links, meta } = usePage().props.reviews;
+    const { data: posts, links, meta } = usePage().props.posts;
     const { filters } = usePage().props;
     const { params, setParams, setTimeDebounce } = useDebouncedSearch(
         route(route().current()),
@@ -54,13 +55,13 @@ export default function DataTable() {
         },
     ];
 
-    const [showDeleteReviewDialog, setShowDeleteReviewDialog] = useState(false);
-    const [reviewId, setReviewId] = useState(null);
+    const [showDeletePostDialog, setShowDeletePostDialog] = useState(false);
+    const [postId, setPostId] = useState(null);
 
     return (
         <div className="space-y-4">
             <TableToolbar
-                placeholder="Search reviews"
+                placeholder="Search posts"
                 search={params?.search}
                 params={params}
                 setParams={setParams}
@@ -80,21 +81,9 @@ export default function DataTable() {
             <Table>
                 <TableHeader className="uppercase text-xs">
                     <TableRow>
-                        <TableHead>Product</TableHead>
-                        <TableHead>User</TableHead>
-                        <TableHead className="w-10">
-                            <TableSortHeader
-                                title="Star"
-                                onClick={() => {
-                                    setTimeDebounce(50);
-                                    sort("star");
-                                }}
-                                sort={
-                                    params.col === "star" ? params.sort : null
-                                }
-                            />
-                        </TableHead>
-                        <TableHead>Comment</TableHead>
+                        <TableHead>Image</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Author</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className="w-10">
                             <TableSortHeader
@@ -114,36 +103,26 @@ export default function DataTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {reviews.length > 0 ? (
-                        reviews.map((review, index) => (
+                    {posts.length > 0 ? (
+                        posts.map((post, index) => (
                             <TableRow
-                                key={`review-table-${index}`}
+                                key={`post-table-${index}`}
                                 className="bg-white"
                             >
-                                <TableCell>{review?.product?.name}</TableCell>
-                                <TableCell>{review?.customer?.name}</TableCell>
-                                <TableCell className="text-center">
-                                    <div className="flex items-center justify-center gap-1">
-                                        {Array.from({ length: 5 }, (_, i) => (
-                                            <StarIcon
-                                                key={i}
-                                                size={16}
-                                                className={
-                                                    i < review.star
-                                                        ? "text-yellow-500"
-                                                        : "text-gray-300"
-                                                }
-                                            />
-                                        ))}
-                                    </div>
+                                <TableCell>
+                                    <Avatar className="rounded-md">
+                                        <AvatarImage src={post.image} />
+                                        <AvatarFallback className="rounded-md">
+                                            DC
+                                        </AvatarFallback>
+                                    </Avatar>
                                 </TableCell>
-                                <TableCell className="break-words w-5/12">
-                                    {review.comment}
-                                </TableCell>
+                                <TableCell>{post.name}</TableCell>
+                                <TableCell>{post?.author?.name}</TableCell>
                                 <TableCell>
                                     {status.map(
                                         (item) =>
-                                            review.status.toLowerCase() ===
+                                            post.status.toLowerCase() ===
                                                 item.value && (
                                                 <span
                                                     key={item.value}
@@ -155,7 +134,7 @@ export default function DataTable() {
                                     )}
                                 </TableCell>
                                 <TableCell className="text-center">
-                                    {formatDate(review.created_at)}
+                                    {formatDate(post.created_at)}
                                 </TableCell>
                                 <TableCell>
                                     <DropdownMenu>
@@ -177,10 +156,10 @@ export default function DataTable() {
 
                                             <DropdownMenuItem
                                                 onClick={() => {
-                                                    setShowDeleteReviewDialog(
+                                                    setShowDeletePostDialog(
                                                         true,
                                                     );
-                                                    setReviewId(review.id);
+                                                    setPostId(post.id);
                                                 }}
                                             >
                                                 Delete
@@ -204,11 +183,11 @@ export default function DataTable() {
             </Table>
             <TablePagination links={links} meta={meta} />
 
-            {showDeleteReviewDialog && (
-                <DeleteReviewDialog
-                    open={showDeleteReviewDialog}
-                    onOpenChange={setShowDeleteReviewDialog}
-                    reviewId={reviewId}
+            {showDeletePostDialog && (
+                <DeletePostDialog
+                    open={showDeletePostDialog}
+                    onOpenChange={setShowDeletePostDialog}
+                    postId={postId}
                     showTrigger={false}
                 />
             )}

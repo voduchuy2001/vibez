@@ -58,7 +58,7 @@ const data = {
             icon: UsersIcon,
         },
         {
-            title: "Roles",
+            title: "Roles and permissions",
             url: route("admin.role.index"),
             icon: KeyRoundIcon,
         },
@@ -66,7 +66,7 @@ const data = {
 
     navSecondary: [
         {
-            title: "Website client",
+            title: "View website",
             url: route("home"),
             icon: EarthIcon,
         },

@@ -37,6 +37,7 @@ class ProductService implements ProductServiceInterface
         );
 
         $result = DataTable::query($this->product->query())
+            ->with(['defaultSku'])
             ->searchable(['name', 'description', 'content'])
             ->applyFilters($filters)
             ->allowedFilters(['status:published', 'status:pending', 'status:draft'])

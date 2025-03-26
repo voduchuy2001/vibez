@@ -21,8 +21,8 @@ class PostService implements PostServiceInterface
     public function index(): AnonymousResourceCollection
     {
         $sort = str_replace(
-            ['star', 'created_at'],
-            ['star', 'created_at'],
+            ['created_at'],
+            ['created_at'],
             request()->query('col')
         );
 
@@ -37,8 +37,8 @@ class PostService implements PostServiceInterface
         );
 
         $result = DataTable::query($this->post->query())
-            ->with(['product', 'customer'])
-            ->searchable(['comment'])
+            ->with(['author'])
+            ->searchable(['name'])
             ->applyFilters($filters)
             ->allowedFilters(['status:published', 'status:pending', 'status:draft'])
             ->applySort($sort)

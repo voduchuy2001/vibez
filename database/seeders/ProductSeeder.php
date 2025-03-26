@@ -19,6 +19,7 @@ class ProductSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             $product = Product::create([
                 'name' => fake()->name(),
+                'code' => strtoupper(Str::random(10)),
                 'thumbnail' => fake()->imageUrl(),
                 'images' => json_encode([fake()->imageUrl(), fake()->imageUrl()]),
                 'description' => fake()->text(),

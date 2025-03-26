@@ -17,12 +17,14 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'code' => $this->code,
             'thumbnail' => $this->thumbnail,
             'images' => $this->images,
             'description' => $this->description,
             'content' => $this->content,
             'status' => $this->status,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'defaultSku' => new SKUResource($this->defaultSku)
         ];
     }
 }

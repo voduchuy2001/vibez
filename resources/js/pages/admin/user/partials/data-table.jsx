@@ -1,4 +1,3 @@
-import TableFilter from "@/components/admin/table-filter";
 import TablePagination from "@/components/admin/table-pagination";
 import TableToolbar from "@/components/admin/table-toolbar";
 import { Button } from "@/components/ui/button";
@@ -18,16 +17,16 @@ import {
 } from "@/components/ui/table";
 import useDebouncedSearch from "@/hooks/use-debounced-search";
 import { usePage } from "@inertiajs/react";
-import { MoreHorizontal, StarIcon } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import EmptyState from "@/components/admin/empty-state";
-import DeleteReviewDialog from "./delete-review-dialog";
+import DeleteUserDialog from "./delete-user-dialog";
 import { useState } from "react";
-import useSorting from "@/hooks/use-sorting";
-import TableSortHeader from "@/components/admin/table-sort-header";
 import { formatDate } from "@/utils/format-date";
+import TableSortHeader from "@/components/admin/table-sort-header";
+import useSorting from "@/hooks/use-sorting";
 
 export default function DataTable() {
-    const { data: reviews, links, meta } = usePage().props.reviews;
+    const { data: users, links, meta } = usePage().props.users;
     const { filters } = usePage().props;
     const { params, setParams, setTimeDebounce } = useDebouncedSearch(
         route(route().current()),
@@ -36,66 +35,39 @@ export default function DataTable() {
 
     const { sort } = useSorting(filters, setParams);
 
-    const status = [
+    const [showDeleteUserDialog, setShowDeleteUserDialog] = useState(false);
+    const [userId, setUserId] = useState(null);
+
+    const superUser = [
         {
-            value: "published",
-            label: "Published",
+            value: 1,
+            label: "Yes",
             color: "green",
         },
         {
-            value: "pending",
-            label: "Pending",
-            color: "yellow",
-        },
-        {
-            value: "draft",
-            label: "Draft",
+            value: 0,
+            label: "No",
             color: "red",
         },
     ];
 
-    const [showDeleteReviewDialog, setShowDeleteReviewDialog] = useState(false);
-    const [reviewId, setReviewId] = useState(null);
-
     return (
         <div className="space-y-4">
             <TableToolbar
-                placeholder="Search reviews"
+                placeholder="Search users"
                 search={params?.search}
                 params={params}
                 setParams={setParams}
                 setTimeDebounce={setTimeDebounce}
             />
-            <div className="flex flex-col gap-1 sm:flex-row sm:space-x-1">
-                <TableFilter
-                    title="Status"
-                    filter="status"
-                    options={status}
-                    params={params}
-                    setParams={setParams}
-                    setTimeDebounce={setTimeDebounce}
-                />
-            </div>
 
             <Table>
                 <TableHeader className="uppercase text-xs">
                     <TableRow>
-                        <TableHead>Product</TableHead>
-                        <TableHead>User</TableHead>
-                        <TableHead className="w-10">
-                            <TableSortHeader
-                                title="Star"
-                                onClick={() => {
-                                    setTimeDebounce(50);
-                                    sort("star");
-                                }}
-                                sort={
-                                    params.col === "star" ? params.sort : null
-                                }
-                            />
-                        </TableHead>
-                        <TableHead>Comment</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Email</TableHead>
                         <TableHead>Status</TableHead>
+                        <TableHead>Super User</TableHead>
                         <TableHead className="w-10">
                             <TableSortHeader
                                 title="Created At"
@@ -114,37 +86,19 @@ export default function DataTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {reviews.length > 0 ? (
-                        reviews.map((review, index) => (
+                    {users.length > 0 ? (
+                        users.map((user, index) => (
                             <TableRow
-                                key={`review-table-${index}`}
+                                key={`user-table-${index}`}
                                 className="bg-white"
                             >
-                                <TableCell>{review?.product?.name}</TableCell>
-                                <TableCell>{review?.customer?.name}</TableCell>
-                                <TableCell className="text-center">
-                                    <div className="flex items-center justify-center gap-1">
-                                        {Array.from({ length: 5 }, (_, i) => (
-                                            <StarIcon
-                                                key={i}
-                                                size={16}
-                                                className={
-                                                    i < review.star
-                                                        ? "text-yellow-500"
-                                                        : "text-gray-300"
-                                                }
-                                            />
-                                        ))}
-                                    </div>
-                                </TableCell>
-                                <TableCell className="break-words w-5/12">
-                                    {review.comment}
-                                </TableCell>
+                                <TableCell>{user.name}</TableCell>
+                                <TableCell>{user.email}</TableCell>
+                                <TableCell>{user.status}</TableCell>
                                 <TableCell>
-                                    {status.map(
+                                    {superUser.map(
                                         (item) =>
-                                            review.status.toLowerCase() ===
-                                                item.value && (
+                                            user.super_user === item.value && (
                                                 <span
                                                     key={item.value}
                                                     className={`inline-flex items-center rounded bg-${item.color}-50 px-2 py-0.5 text-xs font-medium text-${item.color}-700 ring-1 ring-inset ring-${item.color}-600/20`}
@@ -155,7 +109,7 @@ export default function DataTable() {
                                     )}
                                 </TableCell>
                                 <TableCell className="text-center">
-                                    {formatDate(review.created_at)}
+                                    {formatDate(user.created_at)}
                                 </TableCell>
                                 <TableCell>
                                     <DropdownMenu>
@@ -177,10 +131,10 @@ export default function DataTable() {
 
                                             <DropdownMenuItem
                                                 onClick={() => {
-                                                    setShowDeleteReviewDialog(
+                                                    setShowDeleteUserDialog(
                                                         true,
                                                     );
-                                                    setReviewId(review.id);
+                                                    setUserId(user.id);
                                                 }}
                                             >
                                                 Delete
@@ -204,11 +158,11 @@ export default function DataTable() {
             </Table>
             <TablePagination links={links} meta={meta} />
 
-            {showDeleteReviewDialog && (
-                <DeleteReviewDialog
-                    open={showDeleteReviewDialog}
-                    onOpenChange={setShowDeleteReviewDialog}
-                    reviewId={reviewId}
+            {showDeleteUserDialog && (
+                <DeleteUserDialog
+                    open={showDeleteUserDialog}
+                    onOpenChange={setShowDeleteUserDialog}
+                    userId={userId}
                     showTrigger={false}
                 />
             )}

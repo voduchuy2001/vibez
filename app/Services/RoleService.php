@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Facades\DataTable;
-use App\Http\Resources\ReviewResource;
+use App\Http\Resources\RoleResource;
+use App\Models\Role;
 use App\Services\Interfaces\RoleServiceInterface;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Spatie\Permission\Models\Role;
 
 class RoleService implements RoleServiceInterface
 {
@@ -21,31 +21,18 @@ class RoleService implements RoleServiceInterface
     public function index(): AnonymousResourceCollection
     {
         $sort = str_replace(
-            ['star', 'created_at'],
-            ['star', 'created_at'],
+            ['created_at'],
+            ['created_at'],
             request()->query('col')
         );
 
-        $filters = str_replace(
-            [
-                'status:published', 'status:pending', 'status:draft',
-            ],
-            [
-               'status:published', 'status:pending', 'status:draft',
-            ],
-            request()->query('filters') ?? []
-        );
-
         $result = DataTable::query($this->role->query())
-            ->with(['product', 'customer'])
-            ->searchable(['comment'])
-            ->applyFilters($filters)
-            ->allowedFilters(['status:published', 'status:pending', 'status:draft'])
+            ->searchable(['name', 'description'])
             ->applySort($sort)
-            ->allowedSorts(['star'])
+            ->allowedSorts(['created_at'])
             ->make();
 
-        return ReviewResource::collection($result);
+        return RoleResource::collection($result);
     }
 
     public function store($data): void
